@@ -1,0 +1,41 @@
+{
+  "name": "nice-bank-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/run.js",
+    "watch": "nodemon ./bin/run.js",
+    "test": "NODE_ENV=test npm run db:recreate && mocha --recursive test",
+    "db:create": "node ./bin/db.js create",
+    "db:drop": "node ./bin/db.js drop",
+    "db:recreate": "node ./bin/db.js recreate",
+    "db:migrate:make": "knex migrate:make --knexfile db/knexfile.js",
+    "db:migrate": "knex migrate:latest --knexfile db/knexfile.js",
+    "db:migrate:rollback": "knex migrate:rollback --knexfile db/knexfile.js",
+    "db:seed:make": "knex seed:make --knexfile db/knexfile.js",
+    "db:seed": "knex seed:run --knexfile db/knexfile.js",
+    "db:reset": "npm run db:recreate && npm run db:migrate && npm run db:seed",
+    "upstart": "NODE_ENV=production npm run db:create && npm run db:migrate && npm start",
+    "docs": "apidoc -i routes/ -o public/docs/"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "express-jsonschema": "^1.1.6",
+    "knex": "^0.12.9",
+    "lodash": "^4.17.4",
+    "morgan": "~1.8.1",
+    "pg": "^6.1.5",
+    "pug": "~2.0.0-beta11"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.5",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.3.0",
+    "mocha-subject": "^0.2.0",
+    "nodemon": "^1.11.0"
+  }
+}
